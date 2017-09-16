@@ -1,0 +1,36 @@
+{
+  "name": "rutatj",
+  "version": "0.1.0",
+  "description": "RutaTJ web application, devolped by EndFlow",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node server.js",
+    "lint": "standard&&node server.js",
+    "prod": "NODE_ENV=production pm2 start server.js",
+    "build": "next build",
+    "start": "set NODE_ENV=production&&node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saulflores95/RutaTJ.git"
+  },
+  "keywords": [
+    "Ruta",
+    "Trocal",
+    "Tijuana"
+  ],
+  "author": "Enflow Dev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/saulflores95/RutaTJ/issues"
+  },
+  "homepage": "https://github.com/saulflores95/RutaTJ#readme",
+  "dependencies": {
+    "express": "^4.15.4",
+    "next": "^3.2.2",
+    "nextjs": "0.0.3",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  }
+}
