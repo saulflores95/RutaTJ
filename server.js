@@ -1,25 +1,40 @@
-const express = require('express')
+const app = require('express')()
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
 const next = require('next')
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev })
-const handle = app.getRequestHandler()
+const nextApp = next({ dev })
+const nextHandler = nextApp.getRequestHandler()
 
-app.prepare()
-.then(() => {
-  const server = express()
+// fake DB
+let count = 0
+// socket.io server
+io.on('connection', socket => {
+  count++
+  socket.send(count + " Activate socks")
+  io.sockets.emit('broadcast', count + " people onine")
 
-  server.get('/a', (req, res) => {
-    return app.render(req, res, '/b', req.query)
+  socket.on('new user', function (data) {
+    socket.broadcast.emit('new user', {
+      username: Math.random().toString(36).substring(7),
+      position: [0, 0]
+    })
   })
 
-  server.get('/b', (req, res) => {
-    return app.render(req, res, '/a', req.query)
+  socket.on('disconnect', function(data) {
+    count --
+    io.sockets.emit('broadcast', count + " people online")
   })
+})
 
-  server.get('*', (req, res) => {
-    return handle(req, res)
+
+
+nextApp.prepare().then(() => {
+
+  app.get('*', (req, res) => {
+    return nextHandler(req, res)
   })
 
   server.listen(port, (err) => {
