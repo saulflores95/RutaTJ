@@ -9,37 +9,70 @@ const nextApp = next({ dev })
 const nextHandler = nextApp.getRequestHandler()
 
 // fake DB
-let count = 0
-let drivers = [
-  {userId: 'abc123', username: 'Test01'}
+let messages = [
+  {
+    id: 1,
+    text: 'Hola soy cool',
+    username: 'Saul Flores',
+    coords: [0, 3]
+  }
 ]
+
+let drivers = [
+  {
+    username: 'Fred',
+    socketId: 123,
+    coords: [
+      35.44,
+      -122.34
+    ]
+  }
+]
+
+let count = 0
 // socket.io server
 io.on('connection', socket => {
   count++
-  socket.send(count + " Activate socks")
-  io.sockets.emit('broadcast', count + " people onine")
+  console.log('Someone connected...')
+  io.sockets.emit('broadcast', count + " people online")
+  socket.emit('messages', messages)
+  socket.emit('drivers', drivers)
 
-  socket.on('add_user', (data) => {
-    data._id = socket.id
-    drivers.push(data)
-    socket.broadcast.emit('add_user', data)
+  socket.on('new-user', data => {
+    let filter = drivers.filter(driver => driver.socketId === socket.id)
+    console.log(data)
+    if(filter.length === 0) {
+      let driver = {
+        socketId: socket.id,
+        username: Math.random().toString(36).substring(7),
+        coords: data
+      }
+      drivers.push(driver)
+      io.sockets.emit('drivers', drivers)
+    }else {
+      console.log('User logged in')
+    }
+  })
+
+  socket.on('track-user', user => {
+    //let filter = drivers.filter(driver => driver.socketId === user.socketId)
+    let index = drivers.findIndex(driver => driver.socketId === user.socketId)
+    drivers[index] = user
+    io.sockets.emit('drivers', drivers)
+  })
+
+  socket.on('new-message', data => {
+    messages.push(data)
+    io.sockets.emit('messages', messages)
   })
 
   socket.on('disconnect', function(data) {
     count --
-    drivers = drivers.filter(arr => {
-      return arr._id !== socket.id
-    })
-    io.sockets.emit('broadcast', drivers)
     io.sockets.emit('broadcast', count + " people online")
   })
 })
 
-
 nextApp.prepare().then(() => {
-  app.get('/drivers', (req, res) => {
-    return res.json(drivers)
-  })
 
   app.get('*', (req, res) => {
     return nextHandler(req, res)

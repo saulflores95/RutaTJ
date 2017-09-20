@@ -21,5 +21,4 @@ addRoute.getInitialProps = async ({ req, res }) => {
 }
 */
 
-
 export default addRoute

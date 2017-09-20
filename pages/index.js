@@ -3,19 +3,12 @@ import App from '../components/app/App'
 import io from 'socket.io-client'
 import fetch from 'isomorphic-fetch'
 import GeneralMap from '../components/map/GeneralMap'
-import NoSSR from 'react-no-ssr';
+import NoSSR from 'react-no-ssr'
 import { Container, Row, Col, Hidden } from 'react-grid-system'
 import RouteSingle from '../components/routes/RouteSingle'
 class HomePage extends Component {
 
-  static async getInitialProps ({ req }) {
-    const baseUrl = req ? `${req.protocol}://${req.get('Host')}` : ''
-    const res = await fetch(baseUrl + '/drivers')
-    const json = await res.json()
-    return { drivers: json }
-  }
-
-  constructor() {
+  constructor () {
     super()
     this.state = {
       online: 'No people online',
@@ -26,25 +19,25 @@ class HomePage extends Component {
   componentDidMount () {
     this.socket = io()
     let _self = this
-    this.socket.on('broadcast', function(data){
+    this.socket.on('broadcast', function (data) {
       _self.setState({
         online: data
-      });
+      })
     })
-    this.socket.on('add_user', function(data) {
+    this.socket.on('add_user', function (data) {
       _self.setState(state => ({
         drivers: state.drivers.concat(data)
       }))
     })
   }
 
-  componentWillMount() {
+  componentWillMount () {
     this.setState({
       drivers: this.props.drivers
     })
   }
 
-  addUser() {
+  addUser () {
     const user = {
       name: Math.random().toString(36).substring(7)
     }
@@ -54,7 +47,7 @@ class HomePage extends Component {
 
   // close socket connection
   componentWillUnmount () {
-    this.socket.off('message', function(data){
+    this.socket.off('message', function (data) {
       console.log('DATA', data)
       this.setState({
         online: data
@@ -104,7 +97,7 @@ class HomePage extends Component {
                 <div style={styles.rutasContainer}>
                   <RouteSingle key={ruta._id} ruta={ruta} />
                   <button onClick={this.addUser.bind(this)}>Activate User</button>
-              </div>
+                </div>
               </Col>
             </Hidden>
             <Col xs={12} sm={12} md={8} lg={8} style={styles.colWrapper}>
@@ -112,12 +105,12 @@ class HomePage extends Component {
                 <NoSSR onSSR={<div>Map Loading...</div>} >
                   <GeneralMap />
                 </NoSSR>
-            </div>
+              </div>
             </Col>
           </Row>
           <h1>{this.state.online}</h1>
         </App>
-    </div>
+      </div>
     )
   }
 }

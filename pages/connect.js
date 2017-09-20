@@ -6,78 +6,78 @@ import GeneralMap from '../components/map/GeneralMap'
 import NoSSR from 'react-no-ssr';
 import { Container, Row, Col, Hidden } from 'react-grid-system'
 class Connect extends Component {
-
-  static async getInitialProps ({ req }) {
-    const baseUrl = req ? `${req.protocol}://${req.get('Host')}` : ''
-    const res = await fetch(baseUrl + '/drivers')
-    const json = await res.json()
-    return { drivers: json }
+constructor(props) {
+  super(props);
+  this.state = {
+    data: [],
+    drivers: [],
+    coords: []
   }
+}
 
-  constructor() {
-    super()
-    this.state = {
-      online: 'No people online',
-      drivers: []
-    }
-  }
-  // connect to WS server and listen event
-  componentDidMount () {
+componentDidMount () {
     this.socket = io()
     let _self = this
-    this.socket.on('broadcast', function(data){
-      _self.setState({
-        online: data
-      });
-    })
-    this.socket.on('add_user', function(data) {
-      _self.setState(state => ({
-        drivers: state.drivers.concat(data)
-      }))
+    //  this.socket.on('broadcast', data => console.log(data))
+    this.socket.on('drivers', data => {
+      this.setState({
+        drivers: data
+      })
     })
   }
 
-  componentWillMount() {
-    this.setState({
-      drivers: this.props.drivers
-    })
-  }
-
-  addUser() {
-    const user = {
-      name: Math.random().toString(36).substring(7)
-    }
-    let newDrivers = this.state.drivers.slice()
-    newDrivers.push(user)
-    this.setState({
-      drivers: newDrivers
-    })
-    this.socket.emit('add_user', user)
+  componentWillMount () {
   }
 
   // close socket connection
-  componentWillUnmount () {
-    this.socket.off('message', function(data){
-      this.setState({
-        online: data
+  componentWillUnmount () {}
+
+  activate(e) {
+    e.preventDefault()
+    let _self = this
+    navigator.geolocation.getCurrentPosition(function(location) {
+      _self.setState({
+        coords: [location.coords.latitude, location.coords.longitude]
       })
     })
-    this.socket.close()
+    this.socket.emit('new-user', this.state.coords)
   }
+
+  updateLocation(user) {
+    let _self = this
+    if(user.socketId === this.socket.id) {
+      navigator.geolocation.getCurrentPosition(function(location) {
+        _self.setState({
+          coords: [location.coords.latitude, location.coords.longitude]
+        })
+      })
+      user.coords = this.state.coords
+    }
+    this.socket.emit('track-user', user)
+  }
+
+  buttonShower(data) {
+    if(this.socket.id === data.socketId)
+      return <button onClick={this.updateLocation.bind(this, data)}>Update Position</button>
+  }
+
   render () {
     return (
       <div>
         <App>
-          <h1>{this.state.online}</h1>
-          <button onClick={this.addUser.bind(this)}>Activate User</button>
-          {this.state.drivers.map(driver => {
+          <button onClick={this.activate.bind(this)}>Activate</button>
+          <div>
+          {console.log(this.state.drivers)}
+          {this.state.drivers.map(data => {
             return (
-              <div key={driver.name}>
-                <h1>{driver._id}</h1>
-                <h1>{driver.name}</h1>
+              <div key={data.socketId}>
+                <h1>Username: {data.username}</h1> - Socket: {data.socketId}
+                <h3>Coords: {data.coords[0]}:::{data.coords[1]}</h3>
+                {this.buttonShower(data)}
               </div>
             )
           })}
+          </div>
         </App>
     </div>
     )

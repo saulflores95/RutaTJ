@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-//import ReactGA from 'react-ga'
+// import ReactGA from 'react-ga'
 import Head from 'next/head'
 
 export default class App extends Component {
   componentDidMount () {
-    //This is going to be used for google analytics later one
-    //ReactGA.initialize(//ID)
-    //ReactGA.pageview(document.location.pathname)
+    // This is going to be used for google analytics later one
+    // ReactGA.initialize(//ID)
+    // ReactGA.pageview(document.location.pathname)
   }
   render () {
     return (
