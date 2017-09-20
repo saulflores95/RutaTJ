@@ -7,7 +7,6 @@ import NoSSR from 'react-no-ssr'
 import { Container, Row, Col, Hidden } from 'react-grid-system'
 import RouteSingle from '../components/routes/RouteSingle'
 class HomePage extends Component {
-
   constructor () {
     super()
     this.state = {

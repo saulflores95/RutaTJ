@@ -33,15 +33,13 @@ let count = 0
 // socket.io server
 io.on('connection', socket => {
   count++
-  console.log('Someone connected...')
-  io.sockets.emit('broadcast', count + " people online")
-  socket.emit('messages', messages)
+  io.sockets.emit('broadcast', count + ' people online')
+
   socket.emit('drivers', drivers)
 
   socket.on('new-user', data => {
     let filter = drivers.filter(driver => driver.socketId === socket.id)
-    console.log(data)
-    if(filter.length === 0) {
+    if (filter.length === 0) {
       let driver = {
         socketId: socket.id,
         username: Math.random().toString(36).substring(7),
@@ -49,31 +47,33 @@ io.on('connection', socket => {
       }
       drivers.push(driver)
       io.sockets.emit('drivers', drivers)
-    }else {
+    } else {
       console.log('User logged in')
     }
   })
 
+  socket.on('remove-driver', data => {
+    drivers = drivers.filter(driver => {
+      return driver.socketId != data
+    })
+    io.sockets.emit('drivers', drivers)
+  })
+
   socket.on('track-user', user => {
-    //let filter = drivers.filter(driver => driver.socketId === user.socketId)
+    // let filter = drivers.filter(driver => driver.socketId === user.socketId)
     let index = drivers.findIndex(driver => driver.socketId === user.socketId)
     drivers[index] = user
     io.sockets.emit('drivers', drivers)
   })
 
-  socket.on('new-message', data => {
-    messages.push(data)
-    io.sockets.emit('messages', messages)
-  })
-
-  socket.on('disconnect', function(data) {
-    count --
-    io.sockets.emit('broadcast', count + " people online")
+  socket.on('disconnect', function (data) {
+    count--
+    io.sockets.emit('broadcast', count + ' people online')
+    io.sockets.emit('drivers', drivers)
   })
 })
 
 nextApp.prepare().then(() => {
-
   app.get('*', (req, res) => {
     return nextHandler(req, res)
   })
