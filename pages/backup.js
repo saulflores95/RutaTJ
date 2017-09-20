@@ -11,12 +11,12 @@ export default () => (
             <Container>
               <Row>
                 <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
-                  <input type='text' className='input__field input__field--kyo'/>
-                  <label className='input__label input__label--kyo'><span className='input__label-content input__label-content--kyo'>Nombre de la Ruta</span></label>
+                  <input type='text' className='input__field input__field--minoru'/>
+                  <label className='input__label input__label--minoru'><span className='input__label-content input__label-content--minoru'>Nombre de Usuario</span></label>
                 </Col>
                 <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
-                  <input type='text' className='input__field input__field--kyo' />
-                  <label className='input__label input__label--kyo'><span className='input__label-content input__label-content--kyo'>URL de la imagen</span></label>
+                  <input type='text' className='input__field input__field--minoru' />
+                  <label className='input__label input__label--minoru'><span className='input__label-content input__label-content--minoru'>Contraseña</span></label>
                 </Col>
                 <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
                   <button type="submit" form="form1" value="Submit">Submit</button>
@@ -82,58 +82,66 @@ export default () => (
         padding: 1.6em 0;
         width: 100%;
         }
-        input--kyo {
-      	z-index: auto;
-        }
-        .input__field--kyo {
-      	padding: 0.85em 1.5em;
-      	width: 85%;
-      	border-radius: 2em;
-      	background: #fff;
-      	color: #535d92;
-      }
+        .input__field--minoru {
+	width: 100%;
+	background: #fff;
+	box-shadow: 0px 0px 0px 2px transparent;
+	color: #eca29b;
+	-webkit-transition: box-shadow 0.3s;
+	transition: box-shadow 0.3s;
+}
 
-      .input__label--kyo {
-      	z-index: 0;
-      	width: 380px;
-      	text-align: left;
-        font-size: 16px;
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
-      }
+.input__label--minoru {
+	padding: 0;
+	width: 388px;
+	text-align: left;
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
 
-      .input__label--kyo::after {
-      	content: '';
-      	position: fixed;
-      	top: 0;
-      	left: 0;
-      	z-index: 1000;
-      	width: 100%;
-      	height: 100%;
-      	background: #ed3d47;
-      	opacity: 0;
-      	-webkit-transition: opacity 0.5s ease-in-out;
-      	transition: opacity 0.3s ease-in-out;
-      	pointer-events: none;
-      }
+.input__label--minoru::after {
+	content: '';
+  	position: absolute;
+  	top: 0;
+  	z-index: -1;
+  	width: 100%;
+  	height: 4em;
+	box-shadow: 0px 0px 0px 0px;
+	color: rgba(199,152,157, 0.6);
+}
 
-      .input__label-content--kyo {
-      	padding: 0.5em 0;
-      }
+.input__field--minoru:focus {
+	box-shadow: 0px 0px 0px 2px #eca29b;
+}
 
-      .input__field--kyo:focus,
-      .input__field--kyo:focus +  .input__label--kyo .input__label-content--kyo {
-      	z-index: 10000;
-      }
+.input__field--minoru:focus + .input__label--minoru {
+	pointer-events: none;
+}
 
-      .input__field--kyo:focus + .input__label--kyo {
-      	color: #fff;
-      }
+.input__field--minoru:focus + .input__label--minoru::after {
+	-webkit-animation: anim-shadow 0.3s forwards;
+	animation: anim-shadow 0.3s forwards;
+}
 
-      .input__field--kyo:focus + .input__label--kyo::after {
-      	opacity: 1;
-      }
+@-webkit-keyframes anim-shadow {
+	to {
+		box-shadow: 0px 0px 100px 50px;
+    	opacity: 0;
+	}
+}
+
+@keyframes anim-shadow {
+	to {
+		box-shadow: 0px 0px 100px 50px;
+    	opacity: 0;
+	}
+}
+
+.input__label-content--minoru {
+	padding: 0.75em 0.15em;
+}
 
       .login-wrapper {
         width: 600px;
