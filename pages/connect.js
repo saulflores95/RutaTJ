@@ -1,10 +1,6 @@
 import { Component } from 'react'
 import App from '../components/app/App'
 import io from 'socket.io-client'
-import fetch from 'isomorphic-fetch'
-import GeneralMap from '../components/map/GeneralMap'
-import NoSSR from 'react-no-ssr'
-import { Container, Row, Col, Hidden } from 'react-grid-system'
 class Connect extends Component {
   constructor (props) {
     super(props)
@@ -12,10 +8,6 @@ class Connect extends Component {
       drivers: [],
       coords: []
     }
-  }
-
-  componentWillMount() {
-
   }
 
   componentDidMount () {
@@ -26,10 +18,10 @@ class Connect extends Component {
         coords: [location.coords.latitude, location.coords.longitude]
       })
     })
-    window.addEventListener("beforeunload", (ev) =>  {
-        ev.preventDefault()
-        this.removeUser()
-        return 0
+    window.addEventListener('beforeunload', (ev) => {
+      ev.preventDefault()
+      this.removeUser()
+      return 0
     })
     this.socket.on('broadcast', data => {
       console.log(data)
@@ -39,28 +31,23 @@ class Connect extends Component {
         drivers: data
       })
     })
-    setTimeout(function(){
+    setTimeout(function () {
       _self.activate()
     }, 2000)
-
   }
-
   // close socket connection
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.socket.close()
   }
 
   activate () {
-    //e.preventDefault()
-    let _self = this
     this.socket.emit('new-user', this.state.coords)
   }
 
   updateLocation (user) {
-    let _self = this
     if (user.socketId === this.socket.id) {
-      navigator.geolocation.getCurrentPosition((location) => {
-        _self.setState({
+      navigator.geolocation.watchPosition((location) => {
+        this.setState({
           coords: [location.coords.latitude, location.coords.longitude]
         })
       })
@@ -69,15 +56,45 @@ class Connect extends Component {
     this.socket.emit('track-user', user)
   }
 
-  buttonShower (data) {
-    if (this.socket.id === data.socketId) { return <button onClick={this.updateLocation.bind(this, data)}>Update Position</button> }
+  removeUser () {
+    this.socket.emit('remove-driver', this.socket.id)
   }
 
-  removeUser () {
-    let filter = this.state.drivers.filter(driver => {
-      return driver.socketId != this.socket.id
+  buttonShower (data) {
+    if (this.socket.id === data.socketId) { return <button onClick={this.getLocationUpdate.bind(this, data)}>Update Position</button> }
+  }
+
+  showLocation (position) {
+    let latitude = position.coords.latitude
+    let longitude = position.coords.longitude
+    console.log('Latitude : ' + latitude + ' Longitude: ' + longitude)
+    this.setState({
+      coords: [latitude, longitude]
     })
-    this.socket.emit('remove-driver', this.socket.id)
+    let data = {
+      coords: this.state.coords,
+      socketId: this.socket.id
+    }
+    this.socket.emit('update-user-position', data)
+  }
+
+  errorHandler (err) {
+    if (err.code === 1) {
+      console.log('Error: Access is denied!')
+    } else if (err.code === 2) {
+      console.log('Error: Position is unavailable!')
+    }
+  }
+
+  getLocationUpdate () {
+    if (navigator.geolocation) {
+        // timeout at 60000 milliseconds (60 seconds)
+      var options = {timeout: 60000}
+      let geoLoc = navigator.geolocation
+      let watchID = geoLoc.watchPosition(this.showLocation.bind(this), this.errorHandler, options)
+    } else {
+      window.alert('Sorry, browser does not support geolocation!')
+    }
   }
 
   render () {
@@ -89,11 +106,6 @@ class Connect extends Component {
 
           <div>
             {this.state.drivers.map(data => {
-              if(this.socket.id === data.socketId) {
-                setInterval(function() {
-                  this.updateLocation(data)
-                }.bind(this), 3000)
-              }
               return (
                 <div key={data.socketId}>
                   <h1>Username: {data.username}</h1> - Socket: {data.socketId}

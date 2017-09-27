@@ -9,15 +9,6 @@ const nextApp = next({ dev })
 const nextHandler = nextApp.getRequestHandler()
 
 // fake DB
-let messages = [
-  {
-    id: 1,
-    text: 'Hola soy cool',
-    username: 'Saul Flores',
-    coords: [0, 3]
-  }
-]
-
 let drivers = [
   {
     username: 'Fred',
@@ -55,7 +46,7 @@ io.on('connection', socket => {
 
   socket.on('remove-driver', data => {
     drivers = drivers.filter(driver => {
-      return driver.socketId != data
+      return driver.socketId !== data
     })
     io.sockets.emit('drivers', drivers)
   })
@@ -67,12 +58,21 @@ io.on('connection', socket => {
     io.sockets.emit('drivers', drivers)
   })
 
+  socket.on('update-user-position', data => {
+    // let filter = drivers.filter(driver => driver.socketId === user.socketId)
+    let index = drivers.findIndex(driver => driver.socketId === data.socketId)
+    if(drivers[index] === undefined)
+      return 0
+    else
+      drivers[index].coords = data.coords
+    io.sockets.emit('drivers', drivers)
+  })
+
   socket.on('disconnect', function (data) {
     count--
     io.sockets.emit('broadcast', count + ' people online')
     io.sockets.emit('drivers', drivers)
   })
-
 })
 
 nextApp.prepare().then(() => {
