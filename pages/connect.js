@@ -14,22 +14,35 @@ class Connect extends Component {
     }
   }
 
+  componentWillMount() {
+
+  }
+
   componentDidMount () {
     this.socket = io()
     let _self = this
+    navigator.geolocation.getCurrentPosition(function (location) {
+      _self.setState({
+        coords: [location.coords.latitude, location.coords.longitude]
+      })
+    })
     window.addEventListener("beforeunload", (ev) =>  {
         ev.preventDefault()
         this.removeUser()
         return 0
+    })
+    this.socket.on('broadcast', data => {
+      console.log(data)
+    })
+    this.socket.on('drivers', data => {
+      this.setState({
+        drivers: data
       })
-      this.socket.on('broadcast', data => {
-        console.log(data)
-      })
-      this.socket.on('drivers', data => {
-        this.setState({
-          drivers: data
-        })
-      })
+    })
+    setTimeout(function(){
+      _self.activate()
+    }, 2000)
+
   }
 
   // close socket connection
@@ -37,21 +50,16 @@ class Connect extends Component {
     this.socket.close()
   }
 
-  activate (e) {
-    e.preventDefault()
+  activate () {
+    //e.preventDefault()
     let _self = this
-    navigator.geolocation.getCurrentPosition(function (location) {
-      _self.setState({
-        coords: [location.coords.latitude, location.coords.longitude]
-      })
-    })
     this.socket.emit('new-user', this.state.coords)
   }
 
   updateLocation (user) {
     let _self = this
     if (user.socketId === this.socket.id) {
-      navigator.geolocation.getCurrentPosition(function (location) {
+      navigator.geolocation.getCurrentPosition((location) => {
         _self.setState({
           coords: [location.coords.latitude, location.coords.longitude]
         })
@@ -81,6 +89,11 @@ class Connect extends Component {
 
           <div>
             {this.state.drivers.map(data => {
+              if(this.socket.id === data.socketId) {
+                setInterval(function() {
+                  this.updateLocation(data)
+                }.bind(this), 3000)
+              }
               return (
                 <div key={data.socketId}>
                   <h1>Username: {data.username}</h1> - Socket: {data.socketId}

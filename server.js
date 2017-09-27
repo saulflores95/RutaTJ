@@ -39,6 +39,7 @@ io.on('connection', socket => {
 
   socket.on('new-user', data => {
     let filter = drivers.filter(driver => driver.socketId === socket.id)
+    console.log('New User', data)
     if (filter.length === 0) {
       let driver = {
         socketId: socket.id,
@@ -71,6 +72,7 @@ io.on('connection', socket => {
     io.sockets.emit('broadcast', count + ' people online')
     io.sockets.emit('drivers', drivers)
   })
+
 })
 
 nextApp.prepare().then(() => {
