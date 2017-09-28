@@ -19,7 +19,7 @@ let drivers = [
     ]
   }
 ]
-
+//Number of indivuals connected
 let count = 0
 // socket.io server
 io.on('connection', socket => {

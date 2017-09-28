@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 // import ReactGA from 'react-ga'
 import Head from 'next/head'
+import UpperNavigation from '../layout/UpperNavigation'
 
 export default class App extends Component {
   componentDidMount () {
@@ -61,31 +62,28 @@ export default class App extends Component {
           </style>
         </Head>
         <div className='container'>
+          <header id='header'>
+            <UpperNavigation />
+          </header>
           <div className='content'>
             {this.props.children}
           </div>
         </div>
         <style jsx>{`
             .container {
-              max-width: var(--site-width);
-              margin:0 auto;
-              overflow-y: hidden;
-              overflow-x: hidden;
-              height: 100%;
-              position: fixed;
+              height: 100vw;
               width: 100%;
             }
             .content {
               flex: 1;
               position: absolute;
-              top: 69px;
+              top: 64px;
               width: 100%;
               bottom: 0;
-              padding-bottom: 56px;
               overflow-x: hidden;
               overflow-y: scroll;
               -webkit-overflow-scrolling: touch;
-              height:calc(100% - 1px);
+              height:calc(100% - 65px);
             }
           `}</style>
       </div>
