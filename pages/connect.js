@@ -44,18 +44,6 @@ class Connect extends Component {
     this.socket.emit('new-user', this.state.coords)
   }
 
-  updateLocation (user) {
-    if (user.socketId === this.socket.id) {
-      navigator.geolocation.watchPosition((location) => {
-        this.setState({
-          coords: [location.coords.latitude, location.coords.longitude]
-        })
-      })
-      user.coords = this.state.coords
-    }
-    this.socket.emit('track-user', user)
-  }
-
   removeUser () {
     this.socket.emit('remove-driver', this.socket.id)
   }

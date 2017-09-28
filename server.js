@@ -51,20 +51,14 @@ io.on('connection', socket => {
     io.sockets.emit('drivers', drivers)
   })
 
-  socket.on('track-user', user => {
-    // let filter = drivers.filter(driver => driver.socketId === user.socketId)
-    let index = drivers.findIndex(driver => driver.socketId === user.socketId)
-    drivers[index] = user
-    io.sockets.emit('drivers', drivers)
-  })
-
   socket.on('update-user-position', data => {
     // let filter = drivers.filter(driver => driver.socketId === user.socketId)
     let index = drivers.findIndex(driver => driver.socketId === data.socketId)
-    if(drivers[index] === undefined)
+    if (drivers[index] === undefined) {
       return 0
-    else
+    } else {
       drivers[index].coords = data.coords
+    }
     io.sockets.emit('drivers', drivers)
   })
 
