@@ -9,6 +9,8 @@ const nextApp = next({ dev })
 const nextHandler = nextApp.getRequestHandler()
 
 // fake DB
+let routes = require('./rutas.json')
+//Number of indivuals connected
 let drivers = [
   {
     username: 'Fred',
@@ -19,7 +21,6 @@ let drivers = [
     ]
   }
 ]
-//Number of indivuals connected
 let count = 0
 // socket.io server
 io.on('connection', socket => {
@@ -70,6 +71,14 @@ io.on('connection', socket => {
 })
 
 nextApp.prepare().then(() => {
+
+  app.get('/api/routes', (req, res) => {
+    return res.status(200).json({
+      succes: true,
+      data: routes
+    })
+  })
+
   app.get('*', (req, res) => {
     return nextHandler(req, res)
   })

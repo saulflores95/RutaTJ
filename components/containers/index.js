@@ -7,14 +7,6 @@ import NoSSR from 'react-no-ssr'
 import { Container, Row, Col, Hidden } from 'react-grid-system'
 import RouteSingle from '../components/routes/RouteSingle'
 class HomePage extends Component {
-  static async getInitialProps ({ req }) {
-    const baseUrl = req ? `${req.protocol}://${req.get('Host')}` : ''
-    const res = await fetch(baseUrl + '/api/routes')
-    const json = await res.json()
-    return {
-      routes: json.data
-    }
-  }
   constructor () {
     super()
     this.state = {
@@ -94,20 +86,20 @@ class HomePage extends Component {
     }
     return (
       <div>
-        {console.log(this.state.online)}
         <App>
           <Row style={styles.rowWrapper}>
             <Hidden xs sm>
               <Col xs={6} sm={4} md={4} lg={4} style={styles.colWrapper}>
                 <div style={styles.rutasContainer}>
-                  {this.props.routes.map(route => <RouteSingle key={route._id} ruta={route} />)}
+                  <RouteSingle key={ruta._id} ruta={ruta} />
+                  <button onClick={this.addUser.bind(this)}>Activate User</button>
                 </div>
               </Col>
             </Hidden>
             <Col xs={12} sm={12} md={8} lg={8} style={styles.colWrapper}>
               <div style={styles.leafletContainer}>
                 <NoSSR onSSR={<div>Map Loading...</div>} >
-                  <GeneralMap routes={this.props.routes} />
+                  <GeneralMap />
                 </NoSSR>
               </div>
             </Col>

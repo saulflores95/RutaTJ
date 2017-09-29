@@ -12,12 +12,7 @@ export default class GeneralMap extends Component {
       latitude: 32.50504,
       longitude: -116.99056,
       zoom: 13,
-      open: false,
-      showPharmacies: true,
-      showHospitals: true,
-      showDoctors: true,
-      showClinics: true,
-      showLabs: true
+      open: false
     }
   }
 
@@ -75,6 +70,17 @@ export default class GeneralMap extends Component {
                 <span> <br />This is you</span>
               </Popup>
             </Marker>
+            {
+              this.props.routes.map(route => {
+                return (
+                  <Marker position={[route.latitud, route.longitud]}>
+                    <Popup>
+                      <span> <br />{route.text}</span>
+                    </Popup>
+                  </Marker>
+                )
+              })
+            }
           </div>
         </Map>
         <style jsx>
