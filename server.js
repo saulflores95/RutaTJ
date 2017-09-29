@@ -8,9 +8,9 @@ const dev = process.env.NODE_ENV !== 'production'
 const nextApp = next({ dev })
 const nextHandler = nextApp.getRequestHandler()
 
-// fake DB
+//  fake DB
 let routes = require('./rutas.json')
-//Number of indivuals connected
+//  Number of indivuals connected
 let drivers = [
   {
     username: 'Fred',
@@ -22,7 +22,7 @@ let drivers = [
   }
 ]
 let count = 0
-// socket.io server
+//  socket.io server
 io.on('connection', socket => {
   count++
   io.sockets.emit('broadcast', count + ' people online')
@@ -71,7 +71,6 @@ io.on('connection', socket => {
 })
 
 nextApp.prepare().then(() => {
-
   app.get('/api/routes', (req, res) => {
     return res.status(200).json({
       succes: true,

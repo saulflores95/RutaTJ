@@ -4,7 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
-
+import DriverMarker from '../drivers/DriverMarker'
 export default class GeneralMap extends Component {
   constructor () {
     super()
@@ -65,6 +65,7 @@ export default class GeneralMap extends Component {
           <TileLayer
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
           <div>
+            <DriverMarker />
             <Marker position={userPosition}>
               <Popup>
                 <span> <br />This is you</span>

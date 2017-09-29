@@ -4,7 +4,7 @@ import io from 'socket.io-client'
 import fetch from 'isomorphic-fetch'
 import GeneralMap from '../components/map/GeneralMap'
 import NoSSR from 'react-no-ssr'
-import { Container, Row, Col, Hidden } from 'react-grid-system'
+import { Row, Col, Hidden } from 'react-grid-system'
 import RouteSingle from '../components/routes/RouteSingle'
 class HomePage extends Component {
   static async getInitialProps ({ req }) {
@@ -31,11 +31,7 @@ class HomePage extends Component {
         online: data
       })
     })
-    this.socket.on('add_user', function (data) {
-      _self.setState(state => ({
-        drivers: state.drivers.concat(data)
-      }))
-    })
+
   }
 
   componentWillMount () {
@@ -44,13 +40,6 @@ class HomePage extends Component {
     })
   }
 
-  addUser () {
-    const user = {
-      name: Math.random().toString(36).substring(7)
-    }
-    this.state.drivers.push(user)
-    this.socket.emit('add_user', user)
-  }
   // close socket connection
   componentWillUnmount () {
     this.socket.off('message', function (data) {
