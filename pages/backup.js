@@ -5,8 +5,7 @@ import Transition from 'react-motion-ui-pack'
 import LoginForm from '../components/login/loginForm.js'
 
 class Login extends Component {
-
-  constructor() {
+  constructor () {
     super()
     this.state = {
       render: false,
@@ -15,12 +14,11 @@ class Login extends Component {
   }
 
   testing () {
-    if(this.state.render) {
-      return(
+    if (this.state.render) {
+      return (
         <LoginForm />
       )
-    }
-    else {
+    } else {
       return null
     }
   }
@@ -29,13 +27,13 @@ class Login extends Component {
     this.setState({
       render: true,
       top: '68%'
-    });
+    })
   }
 
   render () {
     var prueba = {
       top: this.state.top
-    };
+    }
     return (
       <div>
         <Visible md lg xl>
@@ -58,7 +56,7 @@ class Login extends Component {
                       <Container>
                         <Row>
                           <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
-                            <input type='text' className='input__field input__field--kyo'/>
+                            <input type='text' className='input__field input__field--kyo' />
                             <label className='input__label input__label--kyo'><span className='input__label-content input__label-content--kyo'>Nombre de la Ruta</span></label>
                           </Col>
                           <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
@@ -76,7 +74,7 @@ class Login extends Component {
               </Row>
             </Transition>
             <style jsx>
-             {`
+              {`
                 input {
                 position: relative;
                 z-index: 1;
@@ -156,7 +154,7 @@ class Login extends Component {
             {this.testing()}
             <button type='button' className='button' style={prueba} onClick={this.handleToggle.bind(this)}>Signed in</button>
             <style jsx>
-             {`
+              {`
               .wrapper {
                 background-color:  #ed3d47;
                 width: 100%;

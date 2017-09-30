@@ -32,8 +32,8 @@ export default class RouteSingle extends Component {
         <MuiThemeProvider>
           <List>
             <ListItem
-              leftAvatar={<Avatar src={this.props.ruta.url} style={{top: 8}}/>}
-              rightIcon={<ActionInfo onClick={this.deleteRuta.bind(this)} style={{top: 4}}/>}
+              leftAvatar={<Avatar src={this.props.ruta.url} style={{top: 8}} />}
+              rightIcon={<ActionInfo onClick={this.deleteRuta.bind(this)} style={{top: 4}} />}
               primaryText={this.props.ruta.text}
               secondaryText={`${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`}
               href={`/rutas/${this.props.ruta._id}`}

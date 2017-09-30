@@ -4,7 +4,7 @@ import LocationActivate from '../components/layout/LocationActivate'
 
 class Testing extends Component {
   componentDidMount () {
-    return(
+    return (
       <LocationActivate />
     )
   }

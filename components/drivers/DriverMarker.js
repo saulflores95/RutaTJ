@@ -5,9 +5,7 @@ class DriverMarker extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      drivers: [],
-      coords: [],
-      activated: false
+      drivers: []
     }
   }
 
@@ -32,17 +30,10 @@ class DriverMarker extends Component {
         drivers: data
       })
     })
-    setTimeout(function () {
-      _self.activate()
-    }, 2000)
   }
   // close socket connection
   componentWillUnmount () {
     this.socket.close()
-  }
-
-  activate () {
-    this.socket.emit('new-user', this.state.coords)
   }
 
   removeUser () {
@@ -51,39 +42,6 @@ class DriverMarker extends Component {
 
   buttonShower (data) {
     if (this.socket.id === data.socketId) { return <button onClick={this.getLocationUpdate.bind(this, data)}>Update Position</button> }
-  }
-
-  showLocation (position) {
-    let latitude = position.coords.latitude
-    let longitude = position.coords.longitude
-    console.log('Latitude : ' + latitude + ' Longitude: ' + longitude)
-    this.setState({
-      coords: [latitude, longitude]
-    })
-    let data = {
-      coords: this.state.coords,
-      socketId: this.socket.id
-    }
-    this.socket.emit('update-user-position', data)
-  }
-
-  errorHandler (err) {
-    if (err.code === 1) {
-      console.log('Error: Access is denied!')
-    } else if (err.code === 2) {
-      console.log('Error: Position is unavailable!')
-    }
-  }
-
-  getLocationUpdate () {
-    if (navigator.geolocation) {
-        // timeout at 60000 milliseconds (60 seconds)
-      var options = {timeout: 60000}
-      let geoLoc = navigator.geolocation
-      let watchID = geoLoc.watchPosition(this.showLocation.bind(this), this.errorHandler, options)
-    } else {
-      window.alert('Sorry, browser does not support geolocation!')
-    }
   }
 
   render () {
@@ -97,18 +55,11 @@ class DriverMarker extends Component {
       <div>
         {this.state.drivers.map(data => {
           let _self = this
-          if(!this.state.activated) {
-            this.getLocationUpdate()
-            _self.setState({
-              activated: true
-            })
-            console.log(this.state.activated)
-          }
           const lat = parseFloat(data.coords[0])
           const lon = parseFloat(data.coords[1])
-          console.log(`Render Lat: ${lat}, Lon: ${lon}`);
+          console.log(`Render Lat: ${lat}, Lon: ${lon}`)
           return (
-            <Marker key={data.socketId} icon={busMarker} position={[lat, lon] }>
+            <Marker key={data.socketId} icon={busMarker} position={[lat, lon]}>
               <Popup>
                 <h5>{data.username}</h5>
               </Popup>

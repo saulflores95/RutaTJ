@@ -6,6 +6,8 @@ import GeneralMap from '../components/map/GeneralMap'
 import NoSSR from 'react-no-ssr'
 import { Row, Col, Hidden } from 'react-grid-system'
 import RouteSingle from '../components/routes/RouteSingle'
+import LocationActivate from '../components/layout/LocationActivate'
+
 class HomePage extends Component {
   static async getInitialProps ({ req }) {
     const baseUrl = req ? `${req.protocol}://${req.get('Host')}` : ''
@@ -31,7 +33,6 @@ class HomePage extends Component {
         online: data
       })
     })
-
   }
 
   componentWillMount () {
@@ -82,6 +83,7 @@ class HomePage extends Component {
       <div>
         {console.log(this.state.online)}
         <App>
+          <LocationActivate />
           <Row style={styles.rowWrapper}>
             <Hidden xs sm>
               <Col xs={6} sm={4} md={4} lg={4} style={styles.colWrapper}>
