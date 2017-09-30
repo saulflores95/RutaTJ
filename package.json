@@ -10,8 +10,18 @@
     "lint": "standard&&node server.js",
     "prod": "NODE_ENV=production pm2 start server.js",
     "build": "next build",
-    "start": "set NODE_ENV=production&&node server.js"
+    "winStart": "set NODE_ENV=production&&node server.js",
+    "start": "NODE_ENV=production node server"
+
   },
+  "files": [
+    "rutas.json",
+    "server.js",
+    "pages/",
+    "components/",
+    "static/"
+  ],
+  "alias": "rutatj",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/saulflores95/RutaTJ.git"

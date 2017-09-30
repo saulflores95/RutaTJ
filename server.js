@@ -59,6 +59,7 @@ io.on('connection', socket => {
       return 0
     } else {
       drivers[index].coords = data.coords
+      console.log(`Updated Sucess: ${drivers[index].username} - Cords: ${drivers[index].coords[0]} -  ${drivers[index].coords[1]}`)
     }
     io.sockets.emit('drivers', drivers)
   })

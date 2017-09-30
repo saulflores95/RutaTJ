@@ -78,9 +78,6 @@ class HomePage extends Component {
         paddingLeft: 0
       }
     }
-    let ruta = {
-      _id: 'abc'
-    }
     return (
       <div>
         {console.log(this.state.online)}

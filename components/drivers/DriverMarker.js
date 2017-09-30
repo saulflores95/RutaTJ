@@ -104,9 +104,11 @@ class DriverMarker extends Component {
             })
             console.log(this.state.activated)
           }
-
+          const lat = parseFloat(data.coords[0])
+          const lon = parseFloat(data.coords[1])
+          console.log(`Render Lat: ${lat}, Lon: ${lon}`);
           return (
-            <Marker key={data.socketId} icon={busMarker} position={[data.coords[0], data.coords[1]]}>
+            <Marker key={data.socketId} icon={busMarker} position={[lat, lon] }>
               <Popup>
                 <h5>{data.username}</h5>
               </Popup>
