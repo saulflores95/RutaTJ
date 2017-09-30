@@ -7,7 +7,8 @@ class LocationActivate extends Component {
     super(props)
     this.state = {
       display: 'block',
-      coords: [32.1, -122.1]
+      coords: [32.1, -122.1],
+      inputValue: ''
     }
   }
 
@@ -27,7 +28,11 @@ class LocationActivate extends Component {
   }
 
   activate () {
-    this.socket.emit('new-user', this.state.coords)
+    let user = {
+      username: this.state.inputValue,
+      coords: this.state.coords
+    }
+    this.socket.emit('new-user', user)
   }
 
   showLocation (position) {
@@ -65,6 +70,12 @@ class LocationActivate extends Component {
     }
   }
 
+  updateInputValue(evt) {
+    this.setState({
+      inputValue: evt.target.value
+    })
+  }
+
   render () {
     var drawer = {
       display: this.state.display
@@ -84,6 +95,7 @@ class LocationActivate extends Component {
           >
           <div className='wrapper' style={drawer}>
             <p>Activa tu camion</p>
+            <input value={this.state.inputValue} placeholder='Nombre de usuario' onChange={evt => this.updateInputValue(evt)}/>
             <button type='button' className='button' onClick={this.getLocationUpdate.bind(this)}>Permitir</button>
             <button type='button' className='button' onClick={this.handleClose.bind(this)}>Cancelar</button>
           </div>

@@ -29,14 +29,14 @@ io.on('connection', socket => {
 
   socket.emit('drivers', drivers)
 
-  socket.on('new-user', data => {
+  socket.on('new-user', user => {
     let filter = drivers.filter(driver => driver.socketId === socket.id)
-    console.log('New User', data)
+    console.log('New User', user.username)
     if (filter.length === 0) {
       let driver = {
         socketId: socket.id,
-        username: Math.random().toString(36).substring(7),
-        coords: data
+        username: user.username,
+        coords: user.coords
       }
       drivers.push(driver)
       io.sockets.emit('drivers', drivers)
