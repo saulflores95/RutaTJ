@@ -1,10 +1,9 @@
 import { Component } from 'react'
 import App from '../components/app/App'
 import io from 'socket.io-client'
-import fetch from 'isomorphic-fetch'
 import GeneralMap from '../components/map/GeneralMap'
 import NoSSR from 'react-no-ssr'
-import { Container, Row, Col, Hidden } from 'react-grid-system'
+import { Row, Col, Hidden } from 'react-grid-system'
 import RouteSingle from '../components/routes/RouteSingle'
 class HomePage extends Component {
   constructor () {

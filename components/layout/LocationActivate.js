@@ -14,9 +14,17 @@ class LocationActivate extends Component {
 
   componentDidMount () {
     this.socket = io()
+    window.addEventListener('beforeunload', (ev) => {
+      ev.preventDefault()
+      this.removeUser()
+    })
     this.socket.on('broadcast', data => {
       console.log(data)
     })
+  }
+
+  componentWillUnmount () {
+    this.socket.close()
   }
 
   handleClose () {
@@ -24,7 +32,7 @@ class LocationActivate extends Component {
   }
 
   handleLocation () {
-    alert('Location permitida')
+    window.alert('Location permitida')
   }
 
   activate () {
@@ -35,10 +43,13 @@ class LocationActivate extends Component {
     this.socket.emit('new-user', user)
   }
 
+  removeUser () {
+    this.socket.emit('remove-driver', this.socket.id)
+  }
+
   showLocation (position) {
     let latitude = position.coords.latitude
     let longitude = position.coords.longitude
-    console.log('Latitude : ' + latitude + ' Longitude: ' + longitude)
     this.setState({
       coords: [latitude, longitude]
     })
@@ -70,7 +81,7 @@ class LocationActivate extends Component {
     }
   }
 
-  updateInputValue(evt) {
+  updateInputValue (evt) {
     this.setState({
       inputValue: evt.target.value
     })
@@ -95,7 +106,7 @@ class LocationActivate extends Component {
           >
           <div className='wrapper' style={drawer}>
             <p>Activa tu camion</p>
-            <input value={this.state.inputValue} placeholder='Nombre de usuario' onChange={evt => this.updateInputValue(evt)}/>
+            <input value={this.state.inputValue} placeholder='Nombre de usuario' onChange={evt => this.updateInputValue(evt)} />
             <button type='button' className='button' onClick={this.getLocationUpdate.bind(this)}>Permitir</button>
             <button type='button' className='button' onClick={this.handleClose.bind(this)}>Cancelar</button>
           </div>

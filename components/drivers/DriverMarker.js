@@ -11,40 +11,49 @@ class DriverMarker extends Component {
 
   componentDidMount () {
     this.socket = io()
-    let _self = this
-    navigator.geolocation.getCurrentPosition(function (location) {
-      _self.setState({
-        coords: [location.coords.latitude, location.coords.longitude]
-      })
-    })
-    window.addEventListener('beforeunload', (ev) => {
-      ev.preventDefault()
-      this.removeUser()
-      return 0
-    })
-    this.socket.on('broadcast', data => {
-      console.log(data)
-    })
     this.socket.on('drivers', data => {
       this.setState({
         drivers: data
       })
     })
   }
-  // close socket connection
-  componentWillUnmount () {
-    this.socket.close()
+
+  distance (lat1, lon1, lat2, lon2) {
+    var p = 0.017453292519943295    // Math.PI / 180
+    var c = Math.cos
+    var a = 0.5 - c((lat2 - lat1) * p) / 2 +
+            c(lat1 * p) * c(lat2 * p) *
+            (1 - c((lon2 - lon1) * p)) / 2
+    // console.log('Distance Between: ', 12742 * Math.asin(Math.sqrt(a))); // 2 * R; R = 6371 km
+    return 12742 * Math.asin(Math.sqrt(a))
   }
 
-  removeUser () {
-    this.socket.emit('remove-driver', this.socket.id)
-  }
-
-  buttonShower (data) {
-    if (this.socket.id === data.socketId) { return <button onClick={this.getLocationUpdate.bind(this, data)}>Update Position</button> }
+  checker (rutas, usuario) {
+    const distance = this.distance()
+    let distanceInKm
+    var self = this
+    let status = 'No ha llegado'
+    let i
+    for (i = 0; i < cantidadDeRutas; i++) {
+      let distance = self.distance(rutas[i].latitud, rutas[i].longitud, usuario.latitude, usuario.longitude)
+      distanceInKm = distance * 2
+      if (distanceInKm > 1.5) {
+        status = 'No ha llegado'
+      }
+      if (distanceInKm <= 1.5) {
+        console.log('Distance in Kilometers: ', `${distanceInKm} km from ${rutas[i].text} y ${usuario.emails[0].address}`)
+        status = `Llegando:  ${rutas[i].text}`
+      }
+      if (distanceInKm <= 0.5) {
+        console.log(`${usuario.emails[0].address} llego a ${rutas[i].text}`)
+        status = ` ${rutas[i].text}`
+      }
+      return status
+    }
   }
 
   render () {
+    let L = require('leaflet')
     let { Marker, Popup } = require('react-leaflet')
     var busMarker = L.icon({
       iconUrl: 'https://tickera-wpsalad.netdna-ssl.com/wp-content/themes/tickera/style/img/freebies/icons/events/25.png?x34982',
@@ -54,10 +63,8 @@ class DriverMarker extends Component {
     return (
       <div>
         {this.state.drivers.map(data => {
-          let _self = this
           const lat = parseFloat(data.coords[0])
           const lon = parseFloat(data.coords[1])
-          console.log(`Render Lat: ${lat}, Lon: ${lon}`)
           return (
             <Marker key={data.socketId} icon={busMarker} position={[lat, lon]}>
               <Popup>

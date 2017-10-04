@@ -1,9 +1,4 @@
 import React, {Component} from 'react'
-import FloatingActionButton from 'material-ui/FloatingActionButton'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import ContentAdd from 'material-ui/svg-icons/content/add'
-import Drawer from 'material-ui/Drawer'
-import MenuItem from 'material-ui/MenuItem'
 import DriverMarker from '../drivers/DriverMarker'
 export default class GeneralMap extends Component {
   constructor () {
@@ -44,20 +39,9 @@ export default class GeneralMap extends Component {
   render () {
     const userPosition = [this.state.latitude, this.state.longitude]
 
-    var L = require('leaflet')
-
     var { Map, Marker, Popup, TileLayer } = require('react-leaflet')
 
     var mapCenter = [this.state.latitude, this.state.longitude]
-
-    var styles = {
-      button: {
-        zIndex: 999,
-        position: 'absolute',
-        top: 85,
-        left: 7
-      }
-    }
 
     return (
       <div className='map'>

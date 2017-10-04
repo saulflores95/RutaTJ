@@ -46,6 +46,9 @@ io.on('connection', socket => {
   })
 
   socket.on('remove-driver', data => {
+    console.log('remove activated...')
+    console.log('data', data)
+    console.log('drivers', drivers)
     drivers = drivers.filter(driver => {
       return driver.socketId !== data
     })
