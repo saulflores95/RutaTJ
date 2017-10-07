@@ -2,7 +2,7 @@ import React from 'react'
 import {Row, Col, Container, Visible} from 'react-grid-system'
 import Transition from 'react-motion-ui-pack'
 
-const LoginForm = () => (
+const RegisterForm = () => (
   <div>
     <Transition
       component={false}
@@ -17,17 +17,17 @@ const LoginForm = () => (
       >
       <Row className='Row'>
         <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 50}}>
-          <div className='login-wrapper'>
+          <div className='register-wrapper'>
             <form>
               <Container>
                 <Row>
                   <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
-                    <input type='text' className='input__field input__field--kyo' />
-                    <label className='input__label input__label--kyo'><span className='input__label-content input__label-content--kyo'>Nombre de la Ruta</span></label>
+                    <input type='text' className='input__field'/>
+                    <label className='input__label'><span className='input__label-content'>Nombre de la Ruta</span></label>
                   </Col>
                   <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
-                    <input type='text' className='input__field input__field--kyo' />
-                    <label className='input__label input__label--kyo'><span className='input__label-content input__label-content--kyo'>URL de la imagen</span></label>
+                    <input type='text' className='input__field' />
+                    <label className='input__label'><span className='input__label-content'>URL de la imagen</span></label>
                   </Col>
                   <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
                     <button type='submit' form='form1' value='Submit'>Submit</button>
@@ -40,7 +40,7 @@ const LoginForm = () => (
       </Row>
     </Transition>
     <style jsx>
-      {`
+     {`
         input {
         position: relative;
         z-index: 1;
@@ -93,7 +93,7 @@ const LoginForm = () => (
         width: 100%;
         }
 
-      .login-wrapper {
+      .register-wrapper {
         width: 600px;
         height: 350px;
         display: block;
@@ -104,7 +104,7 @@ const LoginForm = () => (
       }
 
       @media only screen and (max-width: 620px) {
-        .login-wrapper {
+        .register-wrapper {
           width: auto;
         }
       }
@@ -113,4 +113,4 @@ const LoginForm = () => (
   </div>
 );
 
-export default LoginForm;
+export default RegisterForm;
