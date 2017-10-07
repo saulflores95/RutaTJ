@@ -3,12 +3,27 @@ import AppBar from 'material-ui/AppBar'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
+import Link from 'next/link'
+import Router from 'next/router'
+import { setCookie, getCookie } from '../../utils/CookieUtils'
 
 export default class UpperNavigation extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {open: false};
+    this.state = {open: false}
+    this.logout = (e) => this._logout()
+  }
+
+  componentWillMount () {
+    try { injectTapEventPlugin() } catch (e) { }
+  }
+
+  _logout () {
+    setCookie('x-access-token', '')
+    Router.push({
+      pathname: '/login'
+    })
   }
 
   handleToggle = () => this.setState({open: !this.state.open});
@@ -25,8 +40,10 @@ export default class UpperNavigation extends React.Component {
         </MuiThemeProvider>
         <MuiThemeProvider>
           <Drawer open={this.state.open} onRequestChange={(open) => this.setState({open})} docked={false}>
-            <MenuItem>Ruta 1</MenuItem>
-            <MenuItem>Ruta 2</MenuItem>
+            <MenuItem><Link href="/">Home</Link></MenuItem>
+            <MenuItem><Link href="/profile">Profile</Link></MenuItem>
+            <MenuItem><Link href="/login">Log In</Link></MenuItem>
+            <MenuItem onClick={this.logout}>Log out</MenuItem>
           </Drawer>
         </MuiThemeProvider>
       </div>

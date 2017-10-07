@@ -5,7 +5,7 @@ import { spring } from 'react-motion'
 import axios from 'axios'
 import { setCookie } from '../../utils/CookieUtils'
 import Router from 'next/router'
-  
+
 export default class LoginFormMobile extends Component {
   constructor () {
     super()
@@ -77,6 +77,7 @@ export default class LoginFormMobile extends Component {
                   <Container>
                     <Row>
                       <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 10}}>
+                        <p style={{color: 'red'}}>{errorMessage}</p>
                         <input value={username} onChange={this.changeUsername} type='text' className='input' placeholder='Username' />
                       </Col>
                       <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 10}}>
@@ -95,8 +96,6 @@ export default class LoginFormMobile extends Component {
                           }}
                           >
                           <button type='submit' style={buttonStyle} form='form1' className='button' onClick={this.login}>Submit</button>
-                          <p style={{color: 'red'}}>{errorMessage}</p>
-
                         </Transition>
                       </Col>
                     </Row>

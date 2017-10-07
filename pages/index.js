@@ -81,7 +81,6 @@ class HomePage extends Component {
     }
     return (
       <div>
-        {console.log(this.state.online)}
         <App>
           <LocationActivate />
           <Row style={styles.rowWrapper}>

@@ -1,7 +1,7 @@
-import {Component} from 'react'
-import {Row, Col, Container, Visible} from 'react-grid-system'
+import { Component} from 'react'
+import { Row, Col, Container } from 'react-grid-system'
 import Transition from 'react-motion-ui-pack'
-import {spring} from 'react-motion'
+import { spring } from 'react-motion'
 
 export default class RegisterFormMobile extends Component {
   constructor () {
