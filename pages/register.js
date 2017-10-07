@@ -21,7 +21,7 @@ class Register extends Component {
             </div>
             <RegisterFormMobile />
             <style jsx>
-             {`
+              {`
               .wrapper {
                 background-color:  #ed3d47;
                 width: 100%;

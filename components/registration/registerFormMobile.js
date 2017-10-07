@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import {Component} from 'react'
 import {Row, Col, Container, Visible} from 'react-grid-system'
 import Transition from 'react-motion-ui-pack'
 import {spring} from 'react-motion'
@@ -12,7 +12,7 @@ export default class RegisterFormMobile extends Component {
   }
 
   componentDidMount () {
-    this.setState({top: 'auto'});
+    this.setState({top: 'auto'})
   }
 
   render () {
@@ -24,11 +24,11 @@ export default class RegisterFormMobile extends Component {
         <Transition
           component={false}
           enter={{
-            opacity: 1,
+            opacity: 1
 
           }}
           leave={{
-            opacity: 0,
+            opacity: 0
 
           }}
           >
@@ -39,13 +39,13 @@ export default class RegisterFormMobile extends Component {
                   <Container>
                     <Row>
                       <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 10}}>
-                        <input type='text' className='input' placeholder='Name'/>
+                        <input type='text' className='input' placeholder='Name' />
                       </Col>
                       <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 10}}>
-                        <input type='text' className='input' placeholder='Email'/>
+                        <input type='text' className='input' placeholder='Email' />
                       </Col>
                       <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 10}}>
-                        <input type='text' className='input' placeholder='Password'/>
+                        <input type='text' className='input' placeholder='Password' />
                       </Col>
                     </Row>
                     <Transition
@@ -59,7 +59,7 @@ export default class RegisterFormMobile extends Component {
                         scale: spring(0)
                       }}
                       >
-                        <button type='submit' style={buttonStyle} form='form1' className='button' value='Submit'>Submit</button>
+                      <button type='submit' style={buttonStyle} form='form1' className='button' value='Submit'>Submit</button>
                     </Transition>
                   </Container>
                 </form>
@@ -68,7 +68,7 @@ export default class RegisterFormMobile extends Component {
           </Row>
         </Transition>
         <style jsx>
-         {`
+          {`
 
            .input {
              display: inline-block;

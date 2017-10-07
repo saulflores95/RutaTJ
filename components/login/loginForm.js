@@ -111,6 +111,6 @@ const LoginForm = () => (
      `}
     </style>
   </div>
-);
+)
 
-export default LoginForm;
+export default LoginForm

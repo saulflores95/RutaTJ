@@ -103,7 +103,7 @@ nextApp.prepare().then(() => {
       })
     }
   })
-  app.use(unless(['/','/login', '/_next'], (req, res, next) => {
+  app.use(unless(['/', '/login', '/_next'], (req, res, next) => {
     const token = req.cookies['x-access-token']
     if (token) {
       jwt.verify(token, 'jwtSecret', (err, decoded) => {

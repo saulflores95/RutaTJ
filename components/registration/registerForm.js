@@ -22,7 +22,7 @@ const RegisterForm = () => (
               <Container>
                 <Row>
                   <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
-                    <input type='text' className='input__field'/>
+                    <input type='text' className='input__field' />
                     <label className='input__label'><span className='input__label-content'>Nombre de la Ruta</span></label>
                   </Col>
                   <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
@@ -40,7 +40,7 @@ const RegisterForm = () => (
       </Row>
     </Transition>
     <style jsx>
-     {`
+      {`
         input {
         position: relative;
         z-index: 1;
@@ -111,6 +111,6 @@ const RegisterForm = () => (
      `}
     </style>
   </div>
-);
+)
 
-export default RegisterForm;
+export default RegisterForm
