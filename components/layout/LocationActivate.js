@@ -137,13 +137,29 @@ class LocationActivate extends Component {
             margin-left: auto;
             margin-right: auto;
             display: block;
-            width: 50px;
+            width: 100px;
+            margin-top: 5px;
+          }
+
+          .button {
+            background-color: #15ad8b;
+            border: none;
+            color: white;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            width: 100%;
           }
 
           .input {
             display: inline-block;
              background: #F9F9F9;
-             width: 90%;
+             width: 83%;
              margin-left: 30px;
              margin-right: 30px;
              border: 0;
@@ -152,6 +168,7 @@ class LocationActivate extends Component {
              outline: 0;
              -webkit-transition: border-bottom 1s;
              font-size: 16px;
+             margin-bottom: 20px;
           }
 
           .input:focus {
