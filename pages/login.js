@@ -47,11 +47,25 @@
       var signUpStyle = {
         zIndex: this.state.zIndex2
       }
+
+      let key = 1
       return (
         <div>
           <Visible md lg xl>
             <App>
-              <LoginForm />
+              <Transition
+                component={false}
+                enter={{
+                  opacity: 1,
+                  scale: 1
+                }}
+                leave={{
+                  opacity: 0,
+                  scale: 0
+                }}
+                >
+                <LoginForm key={this.key++} />
+              </Transition>
             </App>
           </Visible>
           <Visible xs sm>

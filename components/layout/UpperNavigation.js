@@ -40,10 +40,10 @@ export default class UpperNavigation extends React.Component {
         </MuiThemeProvider>
         <MuiThemeProvider>
           <Drawer open={this.state.open} onRequestChange={(open) => this.setState({open})} docked={false}>
-            <MenuItem><Link href="/">Home</Link></MenuItem>
-            <MenuItem><Link href="/profile">Profile</Link></MenuItem>
-            <MenuItem><Link href="/login">Log In</Link></MenuItem>
-            <MenuItem onClick={this.logout}>Log out</MenuItem>
+            <MenuItem><Link href='/'><a>Home</a></Link></MenuItem>
+            <MenuItem><Link href='/profile'><a>Profile</a></Link></MenuItem>
+            <MenuItem><Link href='/login'><a>Log In</a></Link></MenuItem>
+            <MenuItem onClick={this.logout}><a>Log out</a></MenuItem>
           </Drawer>
         </MuiThemeProvider>
       </div>

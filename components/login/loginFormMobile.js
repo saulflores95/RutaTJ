@@ -58,6 +58,7 @@ export default class LoginFormMobile extends Component {
     var buttonStyle = {
       opacity: this.state.opacity
     }
+    let key = 1
     return (
       <div className='wrapper'>
         <Transition
@@ -70,7 +71,7 @@ export default class LoginFormMobile extends Component {
             opacity: 0
           }}
           >
-          <Row className='Row' style={{position: 'relative', top: 60, maxWidth: '100%', margin: 0}}>
+          <Row className='Row' style={{position: 'relative', top: 60, maxWidth: '100%', margin: 0}} key={this.key++}>
             <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 50}}>
               <div className='login-wrapper'>
                 <form>
@@ -95,7 +96,7 @@ export default class LoginFormMobile extends Component {
                             scale: spring(0)
                           }}
                           >
-                          <button type='submit' style={buttonStyle} form='form1' className='button' onClick={this.login}>Submit</button>
+                          <button type='submit' style={buttonStyle} key={this.key++} form='form1' className='button' onClick={this.login}>Submit</button>
                         </Transition>
                       </Col>
                     </Row>

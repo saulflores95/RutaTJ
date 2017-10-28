@@ -1,44 +1,31 @@
 import React from 'react'
 import {Row, Col, Container, Visible} from 'react-grid-system'
-import Transition from 'react-motion-ui-pack'
 
 const RegisterForm = () => (
   <div>
-    <Transition
-      component={false}
-      enter={{
-        opacity: 1,
-        scale: 1
-      }}
-      leave={{
-        opacity: 0,
-        scale: 0
-      }}
-      >
-      <Row className='Row'>
-        <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 50}}>
-          <div className='register-wrapper'>
-            <form>
-              <Container>
-                <Row>
-                  <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
-                    <input type='text' className='input__field' />
-                    <label className='input__label'><span className='input__label-content'>Nombre de la Ruta</span></label>
-                  </Col>
-                  <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
-                    <input type='text' className='input__field' />
-                    <label className='input__label'><span className='input__label-content'>URL de la imagen</span></label>
-                  </Col>
-                  <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
-                    <button type='submit' form='form1' value='Submit'>Submit</button>
-                  </Col>
-                </Row>
-              </Container>
-            </form>
-          </div>
-        </Col>
-      </Row>
-    </Transition>
+    <Row className='Row'>
+      <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 50}}>
+        <div className='register-wrapper'>
+          <form>
+            <Container>
+              <Row>
+                <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
+                  <input type='text' className='input__field' />
+                  <label className='input__label'><span className='input__label-content'>Nombre de la Ruta</span></label>
+                </Col>
+                <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
+                  <input type='text' className='input__field' />
+                  <label className='input__label'><span className='input__label-content'>URL de la imagen</span></label>
+                </Col>
+                <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
+                  <button type='submit' form='form1' value='Submit'>Submit</button>
+                </Col>
+              </Row>
+            </Container>
+          </form>
+        </div>
+      </Col>
+    </Row>
     <style jsx>
       {`
         input {

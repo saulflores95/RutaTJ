@@ -1,44 +1,31 @@
 import React from 'react'
 import {Row, Col, Container, Visible} from 'react-grid-system'
-import Transition from 'react-motion-ui-pack'
 
 const LoginForm = () => (
   <div>
-    <Transition
-      component={false}
-      enter={{
-        opacity: 1,
-        scale: 1
-      }}
-      leave={{
-        opacity: 0,
-        scale: 0
-      }}
-      >
-      <Row className='Row'>
-        <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 50}}>
-          <div className='login-wrapper'>
-            <form>
-              <Container>
-                <Row>
-                  <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
-                    <input type='text' className='input__field input__field--kyo' />
-                    <label className='input__label input__label--kyo'><span className='input__label-content input__label-content--kyo'>Nombre de la Ruta</span></label>
-                  </Col>
-                  <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
-                    <input type='text' className='input__field input__field--kyo' />
-                    <label className='input__label input__label--kyo'><span className='input__label-content input__label-content--kyo'>URL de la imagen</span></label>
-                  </Col>
-                  <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
-                    <button type='submit' form='form1' value='Submit'>Submit</button>
-                  </Col>
-                </Row>
-              </Container>
-            </form>
-          </div>
-        </Col>
-      </Row>
-    </Transition>
+    <Row className='Row'>
+      <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 50}}>
+        <div className='login-wrapper'>
+          <form>
+            <Container>
+              <Row>
+                <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
+                  <input type='text' className='input__field input__field--kyo' />
+                  <label className='input__label input__label--kyo'><span className='input__label-content input__label-content--kyo'>Nombre de la Ruta</span></label>
+                </Col>
+                <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
+                  <input type='text' className='input__field input__field--kyo' />
+                  <label className='input__label input__label--kyo'><span className='input__label-content input__label-content--kyo'>URL de la imagen</span></label>
+                </Col>
+                <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 20}}>
+                  <button type='submit' form='form1' value='Submit'>Submit</button>
+                </Col>
+              </Row>
+            </Container>
+          </form>
+        </div>
+      </Col>
+    </Row>
     <style jsx>
       {`
         input {

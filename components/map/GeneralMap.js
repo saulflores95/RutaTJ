@@ -36,6 +36,15 @@ export default class GeneralMap extends Component {
     }, 100)
   }
 
+  positionToFloat (latitud, longitud) {
+    var position = []
+    let lat = parseFloat(latitud)
+    let lon = parseFloat(longitud)
+    position[0] = lat
+    position[1] = lon
+    return position
+  }
+
   render () {
     const userPosition = [this.state.latitude, this.state.longitude]
 
@@ -58,7 +67,7 @@ export default class GeneralMap extends Component {
             {
               this.props.routes.map(route => {
                 return (
-                  <Marker position={[route.latitud, route.longitud]}>
+                  <Marker position={this.positionToFloat(route.latitud, route.longitud)} key={route._id}>
                     <Popup>
                       <span> <br />{route.text}</span>
                     </Popup>

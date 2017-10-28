@@ -7,11 +7,24 @@ import RegisterForm from '../components/registration/registerForm.js'
 
 class Register extends Component {
   render () {
+    let key = 1
     return (
       <div>
         <Visible md lg xl>
           <App>
-            <RegisterForm />
+            <Transition
+              component={false}
+              enter={{
+                opacity: 1,
+                scale: 1
+              }}
+              leave={{
+                opacity: 0,
+                scale: 0
+              }}
+              >
+              <RegisterForm key={this.key++}/>
+            </Transition>
           </App>
         </Visible>
         <Visible xs sm>

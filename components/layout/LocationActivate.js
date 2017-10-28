@@ -92,6 +92,7 @@ class LocationActivate extends Component {
     var drawer = {
       display: this.state.display
     }
+    let key = 1
 
     return (
       <div className='wrapper' style={drawer}>
@@ -106,7 +107,7 @@ class LocationActivate extends Component {
           scale: 0
         }}
         >
-          <div className='modal'>
+          <div className='modal' key={this.key++}>
             <Row>
               <Col xs={12} sm={12} md={12} lg={12}>
                 <p>Activa tu camion</p>

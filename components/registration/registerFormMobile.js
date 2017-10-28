@@ -19,6 +19,7 @@ export default class RegisterFormMobile extends Component {
     var buttonStyle = {
       top: this.state.top
     }
+    let key = 1
     return (
       <div className='wrapper'>
         <Transition
@@ -32,7 +33,7 @@ export default class RegisterFormMobile extends Component {
 
           }}
           >
-          <Row className='Row' style={{position: 'relative', top: 60, maxWidth: '100%', margin: 0}}>
+          <Row className='Row' style={{position: 'relative', top: 60, maxWidth: '100%', margin: 0}} key={this.key++}>
             <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 50}}>
               <div className='register-wrapper'>
                 <form>
@@ -59,7 +60,7 @@ export default class RegisterFormMobile extends Component {
                         scale: spring(0)
                       }}
                       >
-                      <button type='submit' style={buttonStyle} form='form1' className='button' value='Submit'>Submit</button>
+                      <button type='submit' style={buttonStyle} key={this.key++} form='form1' className='button' value='Submit'>Submit</button>
                     </Transition>
                   </Container>
                 </form>
