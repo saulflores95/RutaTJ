@@ -209,7 +209,7 @@ class LocationActivate extends Component {
           @media only screen and (max-width: 400px){
             .modal {
               width: auto;
-              height: 50%;
+              height: 40%;
               margin-left: 20px;
               margin-right: 20px;
             }
