@@ -13,7 +13,35 @@ class LoginWrapper extends Component {
       render: false,
       top: '45%',
       zIndex: 1,
-      opacity: 1
+      opacity: 1,
+      email: '',
+      password: ''
+    }
+  }
+
+
+  handleChange(event) {
+    const target = event.target
+    const value = target.type === 'checkbox' ? target.checked : target.value
+    const name = target.name
+    this.setState({
+      [name]: value
+    })
+  }
+
+
+  addUser () {
+    if (this.state.fullName != '') {
+      axios.post('http://localhost:8080/api/login', {
+        email: this.state.email,
+        password: this.state.password
+      })
+      .then(function (response) {
+          console.log(response)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
     }
   }
 
@@ -74,7 +102,7 @@ class LoginWrapper extends Component {
               <img src='../static/logo.png' style={{width: 200, height: 200}} />
             </div>
             {this.renderComponent()}
-            <button type='button' className='button' style={signInStyle} onClick={this.handleToggle.bind(this)}>Signed in</button>
+              <button type='button' className='button' style={signInStyle} onClick={this.handleToggle.bind(this)}>Signed in</button>
             <Link href='/register'>
               <button type='button' className='button-register' style={signUpStyle}>Register</button>
             </Link>
