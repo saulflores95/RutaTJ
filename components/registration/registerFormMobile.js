@@ -40,13 +40,13 @@ export default class RegisterFormMobile extends Component {
                   <Container>
                     <Row>
                       <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 10}}>
-                        <input type='text' className='input' placeholder='Name' />
+                        <input type='text' name='fullName' className='input' placeholder='Name' onChange={this.props.handleChange} />
                       </Col>
                       <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 10}}>
-                        <input type='text' className='input' placeholder='Email' />
+                        <input type='text' name='email' className='input' placeholder='Email' onChange={this.props.handleChange} />
                       </Col>
                       <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 10}}>
-                        <input type='text' className='input' placeholder='Password' />
+                        <input type='text' name='password' className='input' placeholder='Password' onChange={this.props.handleChange} />
                       </Col>
                     </Row>
                     <Transition
@@ -60,10 +60,12 @@ export default class RegisterFormMobile extends Component {
                         scale: spring(0)
                       }}
                       >
-                      <button type='submit' style={buttonStyle} key={this.key++} form='form1' className='button' value='Submit'>Submit</button>
+                      <button onClick={this.props.addUser} style={buttonStyle} key={this.key++} form='form1' className='button'>Submit</button>
                     </Transition>
                   </Container>
                 </form>
+
+
               </div>
             </Col>
           </Row>
