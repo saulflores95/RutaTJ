@@ -11,46 +11,12 @@ export default class LoginFormMobile extends Component {
     super()
     this.state = {
       opacity: 0,
-      username: 'test',
-      password: 'test',
       errorMessage: ''
     }
-    this.changeUsername = e => this._changeUsername(e.target.value)
-    this.changePassword = e => this._changePassword(e.target.value)
-    this.login = e => this._login()
   }
 
   componentDidMount () {
     this.setState({opacity: 1})
-  }
-
-  _changeUsername (value) {
-    this.setState({
-      username: value
-    })
-  }
-  _changePassword (value) {
-    this.setState({
-      password: value
-    })
-  }
-
-  async _login () {
-    const { username, password } = this.state
-    if (!username || !password) return
-    try {
-      const res = await axios.post(window.location.origin + '/authenticate', this.state)
-      if (res.data.success) {
-        setCookie('x-access-token', res.data.token)
-        Router.push({
-          pathname: '/'
-        })
-      }
-    } catch (error) {
-      this.setState({
-        errorMessage: error.response.data.message
-      })
-    }
   }
 
   render () {
@@ -79,10 +45,10 @@ export default class LoginFormMobile extends Component {
                     <Row>
                       <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 10}}>
                         <p style={{color: 'red'}}>{errorMessage}</p>
-                        <input value={username} onChange={this.changeUsername} type='text' className='input' placeholder='Username' />
+                        <input onChange={this.props.handleChange} name='email' type='text' className='input' placeholder='Email' />
                       </Col>
                       <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 10}}>
-                        <input value={password} onChange={this.changePassword} type='text' className='input' placeholder='Password' />
+                        <input onChange={this.props.handleChange} name='password' type='text' className='input' placeholder='Password' />
                       </Col>
                       <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 5}}>
                         <Transition
@@ -96,7 +62,7 @@ export default class LoginFormMobile extends Component {
                             scale: spring(0)
                           }}
                           >
-                          <button type='submit' style={buttonStyle} key={this.key++} form='form1' className='button' onClick={this.login}>Submit</button>
+                          <button type='button' style={buttonStyle} key={this.key++} form='form1' className='button' onClick={this.props.login}>Submit</button>
                         </Transition>
                       </Col>
                     </Row>

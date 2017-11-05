@@ -5,7 +5,7 @@ import Transition from 'react-motion-ui-pack'
 import LoginFormMobile from './loginFormMobile.js'
 import LoginForm from './loginForm.js'
 import Link from 'next/link'
-
+import axios from 'axios'
 class LoginWrapper extends Component {
   constructor () {
     super()
@@ -29,8 +29,12 @@ class LoginWrapper extends Component {
     })
   }
 
+  tokenSuccess(res) {
+      sessionStorage.setItem('accessToken', res.data.token)
+  }
 
-  addUser () {
+  login () {
+    let _self = this
     if (this.state.fullName != '') {
       axios.post('http://localhost:8080/api/login', {
         email: this.state.email,
@@ -38,6 +42,7 @@ class LoginWrapper extends Component {
       })
       .then(function (response) {
           console.log(response)
+          _self.tokenSuccess(response)
       })
       .catch(function (error) {
         console.log(error)
@@ -48,7 +53,7 @@ class LoginWrapper extends Component {
   renderComponent () {
     if (this.state.render) {
       return (
-        <LoginFormMobile />
+        <LoginFormMobile login={this.login.bind(this)} handleChange={this.handleChange.bind(this)}  />
       )
     } else {
       return null

@@ -9,4 +9,11 @@
     </div>
   )
 
+
+  Login.getInitialProps = async ({ req, res }) => {
+    console.log(req.user)
+    let user = 'No User'
+    return { user: user }
+  }
+  
   export default Login
