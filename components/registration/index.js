@@ -51,21 +51,19 @@ class RegisterWrapper extends Component {
     return (
       <div>
         <Visible md lg xl>
-          <App>
-            <Transition
-              component={false}
-              enter={{
-                opacity: 1,
-                scale: 1
-              }}
-              leave={{
-                opacity: 0,
-                scale: 0
-              }}
-              >
-              <RegisterForm key={this.key++}/>
-            </Transition>
-          </App>
+          <Transition
+            component={false}
+            enter={{
+              opacity: 1,
+              scale: 1
+            }}
+            leave={{
+              opacity: 0,
+              scale: 0
+            }}
+            >
+            <RegisterForm key={this.key++}/>
+          </Transition>
         </Visible>
         <Visible xs sm>
           <div className='wrapper'>
