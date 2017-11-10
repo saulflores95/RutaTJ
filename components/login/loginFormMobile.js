@@ -3,7 +3,6 @@ import { Row, Col, Container } from 'react-grid-system'
 import Transition from 'react-motion-ui-pack'
 import { spring } from 'react-motion'
 import axios from 'axios'
-import { setCookie } from '../../utils/CookieUtils'
 import Router from 'next/router'
 
 export default class LoginFormMobile extends Component {

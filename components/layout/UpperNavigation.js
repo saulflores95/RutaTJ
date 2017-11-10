@@ -5,25 +5,16 @@ import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
 import Link from 'next/link'
 import Router from 'next/router'
-import { setCookie, getCookie } from '../../utils/CookieUtils'
 
 export default class UpperNavigation extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {open: false}
-    this.logout = (e) => this._logout()
   }
 
   componentWillMount () {
     try { injectTapEventPlugin() } catch (e) { }
-  }
-
-  _logout () {
-    setCookie('x-access-token', '')
-    Router.push({
-      pathname: '/login'
-    })
   }
 
   handleToggle = () => this.setState({open: !this.state.open});
@@ -44,7 +35,7 @@ export default class UpperNavigation extends React.Component {
             <MenuItem><Link href='/profile'><a className='link_a'>Profile</a></Link></MenuItem>
             <MenuItem><Link href='/admin'><a className='link_a'>Admin</a></Link></MenuItem>
             <MenuItem><Link href='/login'><a className='link_a'>Log In</a></Link></MenuItem>
-            <MenuItem onClick={this.logout}><a className='link_a'>Log out</a></MenuItem>
+            <MenuItem><a className='link_a'>Log out</a></MenuItem>
           </Drawer>
         </MuiThemeProvider>
         <style>
