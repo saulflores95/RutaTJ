@@ -1,6 +1,7 @@
 // utils/withAuth.js - a HOC for protected pages
 import React, {Component} from 'react'
-import AuthService from './auth'
+import AuthService from './AuthService'
+import Router from 'next/router'
 
 export default function withAuth(AuthComponent) {
     const Auth = new AuthService('http://localhost:8080')

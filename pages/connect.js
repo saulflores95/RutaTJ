@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import App from '../components/app/App'
 import io from 'socket.io-client'
+
 class Connect extends Component {
   constructor (props) {
     super(props)

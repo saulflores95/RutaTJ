@@ -21,13 +21,12 @@ export default class AuthService {
     .catch(function (error) {
       console.log(error)
     })
-    
+
     let returnValue = axios.get(`${this.domain}/api/user`)
       .then(function (response) {
         return response
       }).then(res => {
         _self.setProfile(res)
-        console.log('User', res)
         return Promise.resolve(res)
       })
       .catch(function (error) {

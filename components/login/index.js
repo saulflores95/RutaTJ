@@ -6,9 +6,15 @@ import LoginFormMobile from './loginFormMobile.js'
 import LoginForm from './loginForm.js'
 import Link from 'next/link'
 import axios from 'axios'
+import AuthService from '../../utils/AuthService'
+import Router from 'next/router'
+
+const auth = new AuthService('http://localhost:8080')
+
 class LoginWrapper extends Component {
   constructor () {
     super()
+    this.handleSubmit = this.handleSubmit.bind(this)
     this.state = {
       render: false,
       top: '45%',
@@ -20,6 +26,12 @@ class LoginWrapper extends Component {
   }
 
 
+  componentDidMount () {
+    if (auth.loggedIn()) {
+      Router.push('/admin')   // redirect if you're already logged in
+    }
+  }
+
   handleChange(event) {
     const target = event.target
     const value = target.type === 'checkbox' ? target.checked : target.value
@@ -29,31 +41,19 @@ class LoginWrapper extends Component {
     })
   }
 
-  tokenSuccess(res) {
-      sessionStorage.setItem('accessToken', res.data.token)
-  }
-
-  login () {
-    let _self = this
-    if (this.state.fullName != '') {
-      axios.post('http://localhost:8080/api/login', {
-        email: this.state.email,
-        password: this.state.password
+  handleSubmit () {
+    // yay uncontrolled forms!
+    auth.login(this.state.email, this.state.password)
+      .then(res => {
+        console.log('Response: ', res)
       })
-      .then(function (response) {
-          console.log(response)
-          _self.tokenSuccess(response)
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-    }
+      .catch(e => console.log(e))  // you would show/hide error messages with component state here
   }
 
   renderComponent () {
     if (this.state.render) {
       return (
-        <LoginFormMobile login={this.login.bind(this)} handleChange={this.handleChange.bind(this)}  />
+        <LoginFormMobile login={this.handleSubmit} handleChange={this.handleChange.bind(this)}  />
       )
     } else {
       return null

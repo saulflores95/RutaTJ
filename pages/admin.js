@@ -1,5 +1,6 @@
-import { Component } from 'react' 
+import { Component } from 'react'
 import AdminWrapper from '../components/admin'
+import withAuth from  '../utils/withAuth'
 
 const Admin = () => (
   <div>
@@ -9,4 +10,4 @@ const Admin = () => (
   </div>
 )
 
-export default Admin
+export default withAuth(Admin)

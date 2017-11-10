@@ -21,9 +21,8 @@ class Login extends Component {
     // yay uncontrolled forms!
     auth.login(this.refs.email.value, this.refs.password.value)
       .then(res => {
-        console.log(res)
-        Router.push('/')
-      }) 
+        console.log('Response: ', res)
+      })
       .catch(e => console.log(e))  // you would show/hide error messages with component state here
   }
 
