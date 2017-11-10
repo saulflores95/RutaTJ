@@ -4,7 +4,6 @@ export default class AuthService {
 
   constructor(domain) {
     this.domain = domain || 'http://localhost:8080'
-    this.fetch = this.fetch.bind(this)
     this.login = this.login.bind(this)
     this.getProfile = this.getProfile.bind(this)
   }
@@ -22,6 +21,7 @@ export default class AuthService {
     .catch(function (error) {
       console.log(error)
     })
+    
     let returnValue = axios.get(`${this.domain}/api/user`)
       .then(function (response) {
         return response
@@ -81,22 +81,4 @@ export default class AuthService {
     }
   }
 
-  fetch(url, options){
-    // performs api calls sending the required authentication headers
-    const headers = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-
-    if (this.loggedIn()){
-      headers['Authorization'] = 'Bearer ' + this.getToken()
-    }
-
-    return fetch(url, {
-      headers,
-      ...options
-    })
-    .then(this._checkStatus)
-    .then(response => response.json())
-  }
 }
