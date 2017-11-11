@@ -4,14 +4,12 @@
   "description": "RutaTJ web application, devolped by EndFlow",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server.js",
-    "dev": "node server.js",
-    "lint": "standard&&node server.js",
+    "lint": "standard&&next",
     "prod": "NODE_ENV=production pm2 start server.js",
-    "build": "next build",
     "winStart": "set NODE_ENV=production&&node server.js",
-    "start": "NODE_ENV=production node server"
+    "dev": "next",
+    "build": "next build",
+    "start": "NODE_ENV=production next start"
   },
   "files": [
     "rutas.json",

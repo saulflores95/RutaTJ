@@ -10,11 +10,11 @@ import LocationActivate from '../components/layout/LocationActivate'
 
 class HomePage extends Component {
   static async getInitialProps ({ req }) {
-    const baseUrl = req ? `${req.protocol}://${req.get('Host')}` : ''
+    const baseUrl = 'http://localhost:8080'
     const res = await fetch(baseUrl + '/api/routes')
     const json = await res.json()
     return {
-      routes: json.data
+      routes: json
     }
   }
   constructor () {
@@ -25,8 +25,9 @@ class HomePage extends Component {
     }
   }
   // connect to WS server and listen event
+
   componentDidMount () {
-    this.socket = io()
+    this.socket = io('http://localhost:8080')
     let _self = this
     this.socket.on('broadcast', function (data) {
       _self.setState({
@@ -34,7 +35,7 @@ class HomePage extends Component {
       })
     })
   }
-
+/*
   componentWillMount () {
     this.setState({
       drivers: this.props.drivers
@@ -51,7 +52,7 @@ class HomePage extends Component {
     })
     this.socket.close()
   }
-
+*/
   render () {
     let styles = {
       rutasWrapper: {
