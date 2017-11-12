@@ -47,7 +47,7 @@ export default class LoginFormMobile extends Component {
                         <input onChange={this.props.handleChange} name='email' type='text' className='input' placeholder='Email' />
                       </Col>
                       <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 10}}>
-                        <input onChange={this.props.handleChange} name='password' type='text' className='input' placeholder='Password' />
+                        <input onChange={this.props.handleChange} name='password' type='password' className='input' placeholder='Password' autocomplete="off"/>
                       </Col>
                       <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 5}}>
                         <Transition

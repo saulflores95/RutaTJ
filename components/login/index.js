@@ -104,9 +104,9 @@ class LoginWrapper extends Component {
         <Visible xs sm>
           <div className='wrapper'>
             <div className='img-wrapper'>
-              <img src='../static/logo.png' style={{width: 200, height: 200}} />
+              <img src='../static/logo3.png' style={{width: 200, height: 200, borderRadius: '50%'}} />
             </div>
-            {this.renderComponent()}
+              {this.renderComponent()}
               <button type='button' className='button' style={signInStyle} onClick={this.handleToggle.bind(this)}>Signed in</button>
             <Link href='/register'>
               <button type='button' className='button-register' style={signUpStyle}>Register</button>
@@ -136,7 +136,7 @@ class LoginWrapper extends Component {
                 color: #F9F9F9;
               }
               .button {
-                background: #F9F9F9;
+                background: #15ad8b;
                 background-position: 0 200px;
                 height: 60px;
                 width: 150px;
@@ -145,10 +145,10 @@ class LoginWrapper extends Component {
                 left: 0; right: 0;
                 outline: none;
                 border: none;
-                border-radius: 28px;
-                font: 500 20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                border-radius: 15px;
+                font: 500 23px 'Helvetica Neue', Helvetica, Arial, sans-serif, bold;
                 cursor: pointer;
-                color: #ed3d47;
+                color: #F9F9F9;
                 opacity: 1;
                 z-index: 0;
                 -webkit-transition: top .5s, z-index 2s, opacity .5s;
@@ -156,7 +156,7 @@ class LoginWrapper extends Component {
               }
 
               .button-register {
-                background: #F9F9F9;
+                background: #15ad8b;
                 background-position: 0 200px;
                 height: 60px;
                 width: 150px;
@@ -165,10 +165,10 @@ class LoginWrapper extends Component {
                 left: 0; right: 0;
                 outline: none;
                 border: none;
-                border-radius: 28px;
-                font: 500 20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                border-radius: 15px;
+                font: 500 23px 'Helvetica Neue', Helvetica, Arial, sans-serif, bold;
                 cursor: pointer;
-                color: #ed3d47;
+                color: #F9F9F9;
                 opacity: 1;
                 z-index: 0;
                 top: 60%;
