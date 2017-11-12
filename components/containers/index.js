@@ -9,7 +9,6 @@ class HomePage extends Component {
   constructor () {
     super()
     this.state = {
-      online: 'No people online',
       drivers: []
     }
   }
@@ -17,11 +16,6 @@ class HomePage extends Component {
   componentDidMount () {
     this.socket = io()
     let _self = this
-    this.socket.on('broadcast', function (data) {
-      _self.setState({
-        online: data
-      })
-    })
     this.socket.on('add_user', function (data) {
       _self.setState(state => ({
         drivers: state.drivers.concat(data)
@@ -103,7 +97,6 @@ class HomePage extends Component {
               </div>
             </Col>
           </Row>
-          <h1>{this.state.online}</h1>
         </App>
       </div>
     )

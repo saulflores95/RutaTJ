@@ -24,9 +24,6 @@ class Connect extends Component {
       this.removeUser()
       return 0
     })
-    this.socket.on('broadcast', data => {
-      console.log(data)
-    })
     this.socket.on('drivers', data => {
       this.setState({
         drivers: data

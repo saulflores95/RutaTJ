@@ -14,13 +14,10 @@ class LocationActivate extends Component {
   }
 
   componentDidMount () {
-    this.socket = io()
+    this.socket = io('http://localhost:8080')
     window.addEventListener('beforeunload', (ev) => {
       ev.preventDefault()
       this.removeUser()
-    })
-    this.socket.on('broadcast', data => {
-      console.log(data)
     })
   }
 

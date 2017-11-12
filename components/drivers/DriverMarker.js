@@ -10,7 +10,7 @@ class DriverMarker extends Component {
   }
 
   componentDidMount () {
-    this.socket = io()
+    this.socket = io('http://localhost:8080')
     this.socket.on('drivers', data => {
       this.setState({
         drivers: data
@@ -56,8 +56,8 @@ class DriverMarker extends Component {
     let L = require('leaflet')
     let { Marker, Popup } = require('react-leaflet')
     var busMarker = L.icon({
-      iconUrl: 'https://tickera-wpsalad.netdna-ssl.com/wp-content/themes/tickera/style/img/freebies/icons/events/25.png?x34982',
-      iconSize: [80, 55],
+      iconUrl: '/static/rutaBus.png',
+      iconSize: [40, 90],
       popupAnchor: [0, -10]
     })
     return (
