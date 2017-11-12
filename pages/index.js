@@ -29,10 +29,8 @@ class HomePage extends Component {
   componentDidMount () {
     this.socket = io('http://localhost:8080')
     let _self = this
-    this.socket.on('broadcast', function (data) {
-      _self.setState({
-        online: data
-      })
+    this.socket.on('broadcast', data => {
+      console.log('Client data: ', data)
     })
   }
 /*

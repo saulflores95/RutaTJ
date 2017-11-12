@@ -12,7 +12,7 @@ class Connect extends Component {
   }
 
   componentDidMount () {
-    this.socket = io()
+    this.socket = io('http://localhost:8080')
     let _self = this
     navigator.geolocation.getCurrentPosition(function (location) {
       _self.setState({
