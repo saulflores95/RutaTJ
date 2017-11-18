@@ -46,7 +46,7 @@ export default class RegisterFormMobile extends Component {
                         <input type='text' name='email' className='input' placeholder='Email' onChange={this.props.handleChange} />
                       </Col>
                       <Col xs={12} sm={12} md={12} xl={12} style={{marginTop: 10}}>
-                        <input type='text' name='password' className='input' placeholder='Password' onChange={this.props.handleChange} />
+                        <input type='password' name='password' className='input' placeholder='Password' onChange={this.props.handleChange} />
                       </Col>
                     </Row>
                     <Transition
