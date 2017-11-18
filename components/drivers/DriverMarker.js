@@ -63,8 +63,9 @@ class DriverMarker extends Component {
     return (
       <div>
         {this.state.drivers.map(data => {
-          const lat = parseFloat(data.coords[0])
-          const lon = parseFloat(data.coords[1])
+          console.log('Users', data)
+          const lat = parseFloat(data.latitude)
+          const lon = parseFloat(data.longitude)
           return (
             <Marker key={data.socketId} icon={busMarker} position={[lat, lon]}>
               <Popup>

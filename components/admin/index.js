@@ -3,6 +3,7 @@ import {Row, Col, Container, Visible} from 'react-grid-system'
 import App from '../app/App'
 import AdminView from './adminView'
 import Transition from 'react-motion-ui-pack'
+import LocationService from '../location'
 
 class AdminWrapper extends Component {
   constructor () {
@@ -15,6 +16,7 @@ class AdminWrapper extends Component {
     return (
       <div>
         <App>
+          <LocationService />
           <Row style={{margin: 0}}>
             <AdminView />
             <AdminView />
