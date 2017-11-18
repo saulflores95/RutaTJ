@@ -65,7 +65,8 @@ const LoginForm = () => (
           color: white;
           font-weight: bold;
           margin-right: 45%;
-          letter-spacing: 2px;
+          -webkit-letter-spacing: 2px;
+          -moz-letter-spacing: 0px !important;
         }
 
         .h1-wrapper {
